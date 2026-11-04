@@ -1,0 +1,617 @@
+{
+  "metadata": {
+    "nomor_surat": "00492/DST/UN10.F1501/B/PP/2026",
+    "judul": "Kalender Akademik Semester Genap 2025/2026",
+    "fakultas": "Fakultas Ilmu Komputer",
+    "universitas": "Universitas Brawijaya",
+    "tanggal_penerbitan": "2026-01-20"
+  },
+  "kegiatan_perkuliahan": [
+    {
+      "id": "PBM-001",
+      "nama_kegiatan": "Registrasi Administrasi (Pembayaran SPP Online)",
+      "tanggal_mulai": "2026-01-19",
+      "tanggal_selesai": "2026-01-30",
+      "keterangan": null,
+      "kategori": "administrasi"
+    },
+    {
+      "id": "PBM-002",
+      "nama_kegiatan": "Registrasi Akademik (Pengisian KRS)",
+      "tanggal_mulai": "2026-01-20",
+      "tanggal_selesai": "2026-01-30",
+      "keterangan": null,
+      "kategori": "administrasi"
+    },
+    {
+      "id": "PBM-003",
+      "nama_kegiatan": "Batal Tambah Mata Kuliah",
+      "tanggal_mulai": "2026-02-02",
+      "tanggal_selesai": "2026-02-06",
+      "keterangan": null,
+      "kategori": "administrasi"
+    },
+    {
+      "id": "PBM-004",
+      "nama_kegiatan": "Minggu 1: Perkuliahan",
+      "tanggal_mulai": "2026-02-09",
+      "tanggal_selesai": "2026-02-13",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 1
+    },
+    {
+      "id": "PBM-005",
+      "nama_kegiatan": "Minggu 2: Perkuliahan",
+      "tanggal_mulai": "2026-02-16",
+      "tanggal_selesai": "2026-02-20",
+      "keterangan": "Senin, 16 Februari (Cuti Bersama); Selasa, 17 Feb 2026 (Tahun Baru Imlek); 20 Feb 2026 (Perkiraan Ramadhan)",
+      "kategori": "perkuliahan",
+      "minggu": 2,
+      "hari_libur": [
+        {
+          "tanggal": "2026-02-16",
+          "nama": "Cuti Bersama"
+        },
+        {
+          "tanggal": "2026-02-17",
+          "nama": "Tahun Baru Imlek"
+        },
+        {
+          "tanggal": "2026-02-20",
+          "nama": "Perkiraan Ramadhan"
+        }
+      ]
+    },
+    {
+      "id": "PBM-006",
+      "nama_kegiatan": "Minggu 3: Perkuliahan",
+      "tanggal_mulai": "2026-02-23",
+      "tanggal_selesai": "2026-02-27",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 3
+    },
+    {
+      "id": "PBM-007",
+      "nama_kegiatan": "Minggu 4: Perkuliahan/QUIZ",
+      "tanggal_mulai": "2026-03-02",
+      "tanggal_selesai": "2026-03-06",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 4,
+      "has_quiz": true
+    },
+    {
+      "id": "PBM-008",
+      "nama_kegiatan": "Minggu 5: Perkuliahan",
+      "tanggal_mulai": "2026-03-09",
+      "tanggal_selesai": "2026-03-13",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 5
+    },
+    {
+      "id": "PBM-009",
+      "nama_kegiatan": "Minggu 6: Perkuliahan",
+      "tanggal_mulai": "2026-03-16",
+      "tanggal_selesai": "2026-03-20",
+      "keterangan": "Rabu, 18 Mar 2026 (Cuti Bersama); Kamis, 19 Mar 2026 (Nyepi); Jumat, 20 Mar 2026 (Cuti Bersama); Sabtu, 21 Mar 2026 (Idulfitri)",
+      "kategori": "perkuliahan",
+      "minggu": 6,
+      "hari_libur": [
+        {
+          "tanggal": "2026-03-18",
+          "nama": "Cuti Bersama"
+        },
+        {
+          "tanggal": "2026-03-19",
+          "nama": "Nyepi"
+        },
+        {
+          "tanggal": "2026-03-20",
+          "nama": "Cuti Bersama"
+        },
+        {
+          "tanggal": "2026-03-21",
+          "nama": "Idulfitri"
+        }
+      ]
+    },
+    {
+      "id": "PBM-010",
+      "nama_kegiatan": "Minggu 7: Perkuliahan",
+      "tanggal_mulai": "2026-03-23",
+      "tanggal_selesai": "2026-03-27",
+      "keterangan": "Senin, 23 Mar 2026 & Selasa, 24 Mar 2026 (Cuti Bersama)",
+      "kategori": "perkuliahan",
+      "minggu": 7,
+      "hari_libur": [
+        {
+          "tanggal": "2026-03-23",
+          "nama": "Cuti Bersama"
+        },
+        {
+          "tanggal": "2026-03-24",
+          "nama": "Cuti Bersama"
+        }
+      ]
+    },
+    {
+      "id": "PBM-011",
+      "nama_kegiatan": "Minggu 8: Ujian Tengah Semester",
+      "tanggal_mulai": "2026-03-30",
+      "tanggal_selesai": "2026-04-03",
+      "keterangan": "Jumat, 3 Apr 2026 (Wafat Yesus Kristus)",
+      "kategori": "ujian",
+      "minggu": 8,
+      "jenis_ujian": "UTS",
+      "hari_libur": [
+        {
+          "tanggal": "2026-04-03",
+          "nama": "Wafat Yesus Kristus"
+        }
+      ]
+    },
+    {
+      "id": "PBM-012",
+      "nama_kegiatan": "Minggu 9: Perkuliahan/Ujian Progress Kelas Studi Kasus/Berbasis Proyek",
+      "tanggal_mulai": "2026-04-06",
+      "tanggal_selesai": "2026-04-10",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 9
+    },
+    {
+      "id": "PBM-013",
+      "nama_kegiatan": "Minggu 10: Perkuliahan",
+      "tanggal_mulai": "2026-04-13",
+      "tanggal_selesai": "2026-04-17",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 10
+    },
+    {
+      "id": "PBM-014",
+      "nama_kegiatan": "Minggu 11: Perkuliahan/QUIZ",
+      "tanggal_mulai": "2026-04-20",
+      "tanggal_selesai": "2026-04-24",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 11,
+      "has_quiz": true
+    },
+    {
+      "id": "PBM-015",
+      "nama_kegiatan": "Minggu 12: Perkuliahan",
+      "tanggal_mulai": "2026-04-27",
+      "tanggal_selesai": "2026-05-01",
+      "keterangan": "Jumat, 1 Mei 2026 (Hari Buruh)",
+      "kategori": "perkuliahan",
+      "minggu": 12,
+      "hari_libur": [
+        {
+          "tanggal": "2026-05-01",
+          "nama": "Hari Buruh"
+        }
+      ]
+    },
+    {
+      "id": "PBM-016",
+      "nama_kegiatan": "Minggu 13: Perkuliahan",
+      "tanggal_mulai": "2026-05-04",
+      "tanggal_selesai": "2026-05-08",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 13
+    },
+    {
+      "id": "PBM-017",
+      "nama_kegiatan": "Minggu 14: Perkuliahan/Ujian Kelas Studi Kasus/Berbasis Proyek/Ujian Akhir Praktikum",
+      "tanggal_mulai": "2026-05-11",
+      "tanggal_selesai": "2026-05-15",
+      "keterangan": "Kamis, 14 Mei 2026 (Kenaikan Yesus Kristus); Jumat, 15 Mei 2026 (Cuti Bersama)",
+      "kategori": "perkuliahan",
+      "minggu": 14,
+      "hari_libur": [
+        {
+          "tanggal": "2026-05-14",
+          "nama": "Kenaikan Yesus Kristus"
+        },
+        {
+          "tanggal": "2026-05-15",
+          "nama": "Cuti Bersama"
+        }
+      ]
+    },
+    {
+      "id": "PBM-018",
+      "nama_kegiatan": "Minggu 15: Perkuliahan/Ujian Kelas Studi Kasus/Berbasis Proyek/Ujian Akhir Praktikum",
+      "tanggal_mulai": "2026-05-18",
+      "tanggal_selesai": "2026-05-22",
+      "keterangan": null,
+      "kategori": "perkuliahan",
+      "minggu": 15
+    },
+    {
+      "id": "PBM-019",
+      "nama_kegiatan": "Minggu Tenang",
+      "tanggal_mulai": "2026-05-25",
+      "tanggal_selesai": "2026-05-29",
+      "keterangan": "Rabu, 27 Mei 2026 (Iduladha); Kamis, 28 Mei 2026 (Cuti Bersama)",
+      "kategori": "minggu_tenang",
+      "hari_libur": [
+        {
+          "tanggal": "2026-05-27",
+          "nama": "Iduladha"
+        },
+        {
+          "tanggal": "2026-05-28",
+          "nama": "Cuti Bersama"
+        }
+      ]
+    },
+    {
+      "id": "PBM-020",
+      "nama_kegiatan": "Minggu 16: Ujian Akhir Semester (Minggu Pertama)",
+      "tanggal_mulai": "2026-06-01",
+      "tanggal_selesai": "2026-06-05",
+      "keterangan": "Senin, 1 Jun 2026 (Hari Lahir Pancasila)",
+      "kategori": "ujian",
+      "minggu": 16,
+      "jenis_ujian": "UAS",
+      "periode": "minggu_pertama",
+      "hari_libur": [
+        {
+          "tanggal": "2026-06-01",
+          "nama": "Hari Lahir Pancasila"
+        }
+      ]
+    },
+    {
+      "id": "PBM-021",
+      "nama_kegiatan": "Minggu 16: Ujian Akhir Semester (Minggu Kedua)",
+      "tanggal_mulai": "2026-06-08",
+      "tanggal_selesai": "2026-06-12",
+      "keterangan": null,
+      "kategori": "ujian",
+      "minggu": 16,
+      "jenis_ujian": "UAS",
+      "periode": "minggu_kedua"
+    },
+    {
+      "id": "PBM-022",
+      "nama_kegiatan": "Minggu Penilaian & Pendaftaran Semester Antara",
+      "tanggal_mulai": "2026-06-15",
+      "tanggal_selesai": "2026-06-19",
+      "keterangan": "Selasa, 16 Jun 2026 (1 Muharram/Tahun Baru Islam)",
+      "kategori": "administrasi",
+      "hari_libur": [
+        {
+          "tanggal": "2026-06-16",
+          "nama": "1 Muharram/Tahun Baru Islam"
+        }
+      ]
+    },
+    {
+      "id": "PBM-023",
+      "nama_kegiatan": "Batas Akhir Pengumuman Nilai & Pengisian KHS Genap 2025/2026",
+      "tanggal_mulai": "2026-06-26",
+      "tanggal_selesai": "2026-06-26",
+      "keterangan": null,
+      "kategori": "administrasi",
+      "is_deadline": true
+    },
+    {
+      "id": "PBM-024",
+      "nama_kegiatan": "Pelaksanaan Semester Antara",
+      "tanggal_mulai": "2026-06-22",
+      "tanggal_selesai": "2026-07-17",
+      "keterangan": null,
+      "kategori": "semester_antara"
+    },
+    {
+      "id": "PBM-025",
+      "nama_kegiatan": "Batas Akhir Pengumuman Nilai & Pengisian KHS Semester Antara",
+      "tanggal_mulai": "2026-07-24",
+      "tanggal_selesai": "2026-07-24",
+      "keterangan": null,
+      "kategori": "administrasi",
+      "is_deadline": true
+    },
+    {
+      "id": "PBM-026",
+      "nama_kegiatan": "Batas Akhir Pelaksanaan Yudisium",
+      "tanggal_mulai": "2026-07-26",
+      "tanggal_selesai": "2026-07-26",
+      "keterangan": null,
+      "kategori": "administrasi",
+      "is_deadline": true
+    },
+    {
+      "id": "PBM-027",
+      "nama_kegiatan": "Batas Akhir Semester Genap",
+      "tanggal_mulai": "2026-07-31",
+      "tanggal_selesai": "2026-07-31",
+      "keterangan": null,
+      "kategori": "administrasi",
+      "is_deadline": true
+    }
+  ],
+  "kegiatan_pkl_capstone_magang": [
+    {
+      "id": "PKL-001",
+      "nama_kegiatan": "Penentuan Dosen Pembimbing PKL, Capstone, Magang",
+      "tanggal_mulai": "2026-01-19",
+      "tanggal_selesai": "2026-01-23",
+      "sub_kegiatan": [
+        "Rekapitulasi & Penentuan Dosen Pembimbing PKL",
+        "Rekapitulasi & Penentuan Dosen Pembimbing Capstone"
+      ]
+    },
+    {
+      "id": "PKL-002",
+      "nama_kegiatan": "Pelaksanaan PKL, Capstone, Magang & Fase Pembimbingan & Pendaftaran Ujian PKL",
+      "tanggal_mulai": "2026-02-09",
+      "tanggal_selesai": "2026-03-27",
+      "sub_kegiatan": [
+        "Pelaksanaan PKL, Capstone, Magang",
+        "Fase pembimbingan PKL, Capstone, Magang",
+        "Pendaftaran Ujian PKL"
+      ]
+    },
+    {
+      "id": "PKL-003",
+      "nama_kegiatan": "Evaluasi Tengah Semester",
+      "tanggal_mulai": "2026-03-30",
+      "tanggal_selesai": "2026-04-03",
+      "sub_kegiatan": [
+        "Evaluasi Capstone, Magang",
+        "Ujian PKL"
+      ]
+    },
+    {
+      "id": "PKL-004",
+      "nama_kegiatan": "Pelaksanaan PKL, Capstone, Magang & Fase Pembimbingan & Pendaftaran Ujian PKL",
+      "tanggal_mulai": "2026-04-06",
+      "tanggal_selesai": "2026-05-22",
+      "sub_kegiatan": [
+        "Pelaksanaan PKL, Capstone, Magang",
+        "Fase Pembimbingan PKL, Capstone, Magang",
+        "Pendaftaran Ujian PKL"
+      ]
+    },
+    {
+      "id": "PKL-005",
+      "nama_kegiatan": "Finalisasi Capstone dan Magang",
+      "tanggal_mulai": "2026-05-18",
+      "tanggal_selesai": "2026-05-22",
+      "deskripsi": "Dokumen Pelaporan, finalisasi penilaian Pembimbing dan Mitra"
+    },
+    {
+      "id": "PKL-006",
+      "nama_kegiatan": "Evaluasi Akhir Semester",
+      "tanggal_mulai": "2026-05-25",
+      "tanggal_selesai": "2026-06-05",
+      "sub_kegiatan": [
+        "Presentasi/Ujian Akhir Magang Berdampak",
+        "Pameran Capstone",
+        "Ujian PKL"
+      ]
+    }
+  ],
+  "kegiatan_skripsi": [
+    {
+      "id": "SKR-001",
+      "nama_kegiatan": "Pra-Proposal",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-07-31"
+    },
+    {
+      "id": "SKR-002",
+      "nama_kegiatan": "Pengajuan Topik Skripsi via FILKOM APPS oleh Dosen",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-02-27"
+    },
+    {
+      "id": "SKR-003",
+      "nama_kegiatan": "Pengajuan/Revisi Proposal",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-03-02"
+    },
+    {
+      "id": "SKR-004",
+      "nama_kegiatan": "Penentuan pembimbing & penerbitan surat tugas pembimbing",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-03-06"
+    },
+    {
+      "id": "SKR-005",
+      "nama_kegiatan": "P0",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-03-27",
+      "tahap": "P0"
+    },
+    {
+      "id": "SKR-006",
+      "nama_kegiatan": "Pengajuan SK Seminar Proposal",
+      "tanggal_mulai": "2026-03-30",
+      "tanggal_selesai": "2026-04-03"
+    },
+    {
+      "id": "SKR-007",
+      "nama_kegiatan": "P1 (kemajuan > 50%)",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-05-03",
+      "tahap": "P1",
+      "progress_minimum": "50%"
+    },
+    {
+      "id": "SKR-008",
+      "nama_kegiatan": "P2 (kemajuan > 80%)",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-06-26",
+      "tahap": "P2",
+      "progress_minimum": "80%"
+    },
+    {
+      "id": "SKR-009",
+      "nama_kegiatan": "Pendaftaran Semhas & Ujian Skripsi",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-07-10"
+    },
+    {
+      "id": "SKR-010",
+      "nama_kegiatan": "Pelaksanaan Seminar Hasil",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-07-17"
+    },
+    {
+      "id": "SKR-011",
+      "nama_kegiatan": "Pelaksanaan Ujian Skripsi",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-07-24"
+    },
+    {
+      "id": "SKR-012",
+      "nama_kegiatan": "Batas akhir pelaksanaan Yudisium",
+      "tanggal_mulai": "2026-07-26",
+      "tanggal_selesai": "2026-07-26",
+      "is_deadline": true
+    },
+    {
+      "id": "SKR-013",
+      "nama_kegiatan": "Evaluasi akhir semester skripsi",
+      "tanggal_mulai": "2026-07-13",
+      "tanggal_selesai": "2026-07-26"
+    }
+  ],
+  "kegiatan_tesis": [
+    {
+      "id": "TES-001",
+      "nama_kegiatan": "Pendaftaran dan Pelaksanaan Seminar Proposal, Seminar Hasil dan/atau Ujian Tesis",
+      "tanggal_mulai": "2026-01-12",
+      "tanggal_selesai": "2026-07-24"
+    },
+    {
+      "id": "TES-002",
+      "nama_kegiatan": "Batas Akhir Pelaksanaan Ujian Tesis",
+      "tanggal_mulai": "2026-07-24",
+      "tanggal_selesai": "2026-07-24",
+      "is_deadline": true
+    }
+  ],
+  "ketentuan_umum": {
+    "jumlah_pertemuan": {
+      "total": 16,
+      "perkuliahan": 14,
+      "uts": 1,
+      "uas": 1,
+      "deskripsi": "Setiap mata kuliah wajib dilaksanakan 16 pertemuan per semester"
+    },
+    "perkuliahan_pengganti": {
+      "maksimal": 3,
+      "bentuk": [
+        "daring_sinkron",
+        "daring_asinkron"
+      ],
+      "catatan": "Beban pertemuan pengganti harus sesuai jumlah SKS mata kuliah dan merujuk Pedoman Akademik UB 2024/2025"
+    },
+    "pembelajaran_daring": {
+      "sinkron": {
+        "platform": [
+          "Zoom",
+          "Google Meet"
+        ],
+        "durasi_maksimal": "60 menit/sesi"
+      },
+      "asinkron": {
+        "platform": "LMS BRONE",
+        "bentuk": [
+          "modul",
+          "video",
+          "forum",
+          "penugasan"
+        ]
+      }
+    },
+    "presensi": {
+      "sistem": "SIADO",
+      "wajib_dicatat": [
+        "daring_sinkron",
+        "daring_asinkron"
+      ],
+      "bukti_asinkron": "penugasan/tugas di LMS BRONE"
+    }
+  },
+  "hari_libur_nasional": [
+    {
+      "tanggal": "2026-02-16",
+      "nama": "Cuti Bersama"
+    },
+    {
+      "tanggal": "2026-02-17",
+      "nama": "Tahun Baru Imlek"
+    },
+    {
+      "tanggal": "2026-02-20",
+      "nama": "Perkiraan Ramadhan"
+    },
+    {
+      "tanggal": "2026-03-18",
+      "nama": "Cuti Bersama"
+    },
+    {
+      "tanggal": "2026-03-19",
+      "nama": "Nyepi"
+    },
+    {
+      "tanggal": "2026-03-20",
+      "nama": "Cuti Bersama"
+    },
+    {
+      "tanggal": "2026-03-21",
+      "nama": "Idulfitri"
+    },
+    {
+      "tanggal": "2026-03-23",
+      "nama": "Cuti Bersama"
+    },
+    {
+      "tanggal": "2026-03-24",
+      "nama": "Cuti Bersama"
+    },
+    {
+      "tanggal": "2026-04-03",
+      "nama": "Wafat Yesus Kristus"
+    },
+    {
+      "tanggal": "2026-05-01",
+      "nama": "Hari Buruh"
+    },
+    {
+      "tanggal": "2026-05-14",
+      "nama": "Kenaikan Yesus Kristus"
+    },
+    {
+      "tanggal": "2026-05-15",
+      "nama": "Cuti Bersama"
+    },
+    {
+      "tanggal": "2026-05-27",
+      "nama": "Iduladha"
+    },
+    {
+      "tanggal": "2026-05-28",
+      "nama": "Cuti Bersama"
+    },
+    {
+      "tanggal": "2026-06-01",
+      "nama": "Hari Lahir Pancasila"
+    },
+    {
+      "tanggal": "2026-06-16",
+      "nama": "1 Muharram/Tahun Baru Islam"
+    }
+  ]
+}
