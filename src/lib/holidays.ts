@@ -29,11 +29,6 @@ export function nextWorkday(date: IsoDate): IsoDate {
   return next;
 }
 
-/** Tanggal merah pertama pada atau setelah `date`. */
-export function nextHoliday(date: IsoDate): Holiday | undefined {
-  return holidays.find((holiday) => holiday.date >= date);
-}
-
 /** True jika `date` sudah melewati akhir data hari libur. */
 export function isHolidayDataExpired(date: IsoDate): boolean {
   return date > lastCovered;

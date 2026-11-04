@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, dayOfWeek, diffDays, formatLong, todayWib } from './date';
-import { holidayOn, holidays, isDayOff, isHolidayDataExpired, nextHoliday, nextWorkday } from './holidays';
+import { addDays, dayOfWeek, formatLong, todayWib } from './date';
+import { holidayOn, holidays, isDayOff, isHolidayDataExpired, nextWorkday } from './holidays';
 import { uniformFor, weekOfMonth } from './uniform';
 
 describe('todayWib', () => {
@@ -16,7 +16,6 @@ describe('todayWib', () => {
 describe('date helpers', () => {
   it('melewati batas bulan dan tahun', () => {
     expect(addDays('2026-12-31', 1)).toBe('2027-01-01');
-    expect(diffDays('2026-12-31', '2027-01-02')).toBe(2);
   });
 
   it('memformat tanggal dalam bahasa Indonesia', () => {
@@ -100,14 +99,8 @@ describe('hari libur', () => {
     expect(nextWorkday('2027-03-05')).toBe('2027-03-16');
   });
 
-  it('tanggal merah terdekat menyertakan hari ini', () => {
-    expect(nextHoliday('2026-11-04')?.date).toBe('2026-12-24');
-    expect(nextHoliday('2026-12-24')?.date).toBe('2026-12-24');
-  });
-
   it('menandai data yang sudah habis', () => {
     expect(isHolidayDataExpired('2027-12-26')).toBe(false);
     expect(isHolidayDataExpired('2027-12-27')).toBe(true);
-    expect(nextHoliday('2027-12-27')).toBeUndefined();
   });
 });

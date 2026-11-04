@@ -25,11 +25,6 @@ export function addDays(date: IsoDate, days: number): IsoDate {
   return new Date(toUtc(date).getTime() + days * MS_PER_DAY).toISOString().slice(0, 10);
 }
 
-/** Jumlah hari dari `from` ke `to`; negatif jika `to` lebih awal. */
-export function diffDays(from: IsoDate, to: IsoDate): number {
-  return Math.round((toUtc(to).getTime() - toUtc(from).getTime()) / MS_PER_DAY);
-}
-
 /** 0 = Minggu, 1 = Senin, ..., 6 = Sabtu. */
 export function dayOfWeek(date: IsoDate): number {
   return toUtc(date).getUTCDay();

@@ -8,9 +8,8 @@ Buka aplikasinya: <https://rendicahya.github.io/seragam/>
 
 - Seragam hari ini dan hari kerja berikutnya, lengkap dengan fotonya
 - Akhir pekan, hari libur nasional, dan cuti bersama ditampilkan sebagai libur
-- Tanggal merah terdekat dengan hitungan mundur
-- Kalender akademik semester
-- Berjalan offline, mengikuti tanggal WIB, dan mendukung dark mode
+- Berjalan offline dan mengikuti tanggal WIB
+- Tombol mode terang dan gelap
 
 ## Memasang aplikasi
 
@@ -40,9 +39,6 @@ Setiap push ke `main` di-deploy otomatis lewat GitHub Actions.
 | --- | --- | --- |
 | Aturan seragam | `src/lib/uniform.ts` | Saat aturan berubah |
 | Hari libur dan cuti bersama | `src/data/holidays.json` | Setiap terbit SKB 3 Menteri baru; data saat ini sampai akhir 2027 |
-| Kalender akademik | `src/data/kalender-genap-2025-2026.json` | Setiap semester; data saat ini berakhir 31 Juli 2026 |
-
-Untuk semester baru, tambahkan file JSON berformat sama, lalu ganti `import` di `src/components/Calendar.svelte`.
 
 Data hari libur bersumber dari SKB 3 Menteri yang dimuat [Setneg](https://setneg.go.id/baca/index/inilah_skb_3_menteri_libur_nasional_dan_cuti_bersama_2027).
 

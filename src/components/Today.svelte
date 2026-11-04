@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { addDays, diffDays, formatLong, formatShort } from '../lib/date';
-  import { holidayOn, isDayOff, isHolidayDataExpired, nextHoliday, nextWorkday } from '../lib/holidays';
+  import { addDays, formatLong, formatShort } from '../lib/date';
+  import { holidayOn, isDayOff, isHolidayDataExpired, nextWorkday } from '../lib/holidays';
   import { uniformFor, weekOfMonth } from '../lib/uniform';
   import InstallPrompt from './InstallPrompt.svelte';
+  import ThemeToggle from './ThemeToggle.svelte';
 
   let { today }: { today: string } = $props();
 
@@ -15,16 +16,11 @@
   const holiday = $derived(holidayOn(viewed));
   const dayOff = $derived(isDayOff(viewed));
   const uniform = $derived(uniformFor(viewed));
-
-  const upcoming = $derived(nextHoliday(today));
-  const upcomingDays = $derived(upcoming ? diffDays(today, upcoming.date) : 0);
-  const upcomingCountdown = $derived(
-    upcomingDays === 0 ? 'Hari ini' : upcomingDays === 1 ? 'Besok' : `${upcomingDays} hari lagi`,
-  );
 </script>
 
 <header>
   <h1>👔 Pakai seragam apa hari ini?</h1>
+  <ThemeToggle />
 </header>
 
 <div class="tabs" role="group" aria-label="Pilih hari">
@@ -55,48 +51,46 @@
   {/if}
 </main>
 
-{#if upcoming}
-  <section class="holiday" aria-label="Tanggal merah terdekat">
-    <div>
-      <h3>🎉 Tanggal merah terdekat</h3>
-      <p>{formatLong(upcoming.date)}</p>
-      <p class="muted">{upcoming.type === 'cuti' ? 'Cuti bersama ' : ''}{upcoming.name}</p>
-    </div>
-    <strong>{upcomingCountdown}</strong>
-  </section>
-{/if}
-
 {#if isHolidayDataExpired(today)}
   <p class="notice">Data hari libur sudah habis, jadi hanya akhir pekan yang dikenali sebagai libur.</p>
 {/if}
 
-<a class="calendar-link" href="#/kalender">Lihat kalender akademik 📅</a>
-
 <InstallPrompt />
 
 <style>
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
   h1 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 700;
-    text-align: center;
+    line-height: 1.3;
   }
 
   .tabs {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.25rem;
-    padding: 0.25rem;
-    border-radius: var(--radius);
+    gap: 0.125rem;
+    width: fit-content;
+    margin-inline: auto;
+    padding: 0.1875rem;
+    border-radius: 10px;
     background: var(--surface-muted);
   }
 
   .tabs button {
-    min-height: 2.75rem;
-    padding: 0.25rem 0.5rem;
+    min-height: 2rem;
+    padding: 0.125rem 0.875rem;
     border: 0;
-    border-radius: 10px;
+    border-radius: 8px;
     background: transparent;
+    font-size: 0.875rem;
     font-weight: 600;
+    white-space: nowrap;
     cursor: pointer;
   }
 
@@ -153,41 +147,5 @@
     margin-top: 0.5rem;
     font-size: 0.8125rem;
     color: var(--text-muted);
-  }
-
-  .holiday {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
-    font-size: 0.9375rem;
-  }
-
-  .holiday h3 {
-    margin-bottom: 0.25rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--text-muted);
-  }
-
-  .holiday strong {
-    flex: none;
-    color: var(--accent);
-  }
-
-  .muted {
-    color: var(--text-muted);
-    font-size: 0.875rem;
-  }
-
-  .calendar-link {
-    display: block;
-    padding: 0.625rem;
-    text-align: center;
-    font-weight: 600;
   }
 </style>

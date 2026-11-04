@@ -1,21 +1,12 @@
 <script lang="ts">
-  import Calendar from './components/Calendar.svelte';
   import Today from './components/Today.svelte';
   import { todayWib } from './lib/date';
 
-  const currentRoute = () => (location.hash === '#/kalender' ? 'kalender' : 'seragam');
-
-  let route = $state(currentRoute());
   let today = $state(todayWib());
 
   // Aplikasi yang terpasang bisa terbuka berhari-hari, jadi tanggal harus dicek ulang.
   function refreshToday() {
     today = todayWib();
-  }
-
-  function onHashChange() {
-    route = currentRoute();
-    window.scrollTo(0, 0);
   }
 
   $effect(() => {
@@ -24,16 +15,11 @@
   });
 </script>
 
-<svelte:window onhashchange={onHashChange} onfocus={refreshToday} />
+<svelte:window onfocus={refreshToday} />
 <svelte:document onvisibilitychange={refreshToday} />
 
 <div class="page">
-  {#if route === 'kalender'}
-    <Calendar {today} />
-  {:else}
-    <Today {today} />
-  {/if}
-  <footer>Powered by ☕</footer>
+  <Today {today} />
 </div>
 
 <style>
@@ -46,13 +32,5 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-
-  footer {
-    margin-top: auto;
-    padding-top: 0.5rem;
-    text-align: center;
-    font-size: 0.8125rem;
-    color: var(--text-muted);
   }
 </style>
