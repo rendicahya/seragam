@@ -1,5 +1,6 @@
 <script lang="ts">
   import Today from './components/Today.svelte';
+  import UpdatePrompt from './components/UpdatePrompt.svelte';
   import { todayWib } from './lib/date';
 
   let today = $state(todayWib());
@@ -19,6 +20,7 @@
 <svelte:document onvisibilitychange={refreshToday} />
 
 <div class="page">
+  <UpdatePrompt />
   <Today {today} />
 </div>
 

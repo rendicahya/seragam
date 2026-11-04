@@ -8,7 +8,9 @@ export default defineConfig({
   plugins: [
     svelte(),
     VitePWA({
-      registerType: 'autoUpdate',
+      // Versi baru menunggu sampai pengguna menekan tombol Update (UpdatePrompt.svelte).
+      registerType: 'prompt',
+      injectRegister: false,
       includeAssets: ['favicon.svg', 'icons/apple-touch-icon.png'],
       manifest: {
         name: 'Pakai seragam apa hari ini?',

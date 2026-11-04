@@ -10,6 +10,7 @@ Buka aplikasinya: <https://rendicahya.github.io/seragam/>
 - Akhir pekan, hari libur nasional, dan cuti bersama ditampilkan sebagai libur
 - Berjalan offline dan mengikuti tanggal WIB
 - Tombol mode terang dan gelap
+- Tombol Update saat versi baru tersedia
 
 ## Memasang aplikasi
 
