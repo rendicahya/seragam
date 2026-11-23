@@ -11,6 +11,7 @@ Buka aplikasinya: <https://rendicahya.github.io/seragam/>
 - Berjalan offline dan mengikuti tanggal WIB
 - Tombol mode terang dan gelap
 - Tombol Update saat versi baru tersedia
+- Pengingat notifikasi setiap hari kerja pukul 06.00 WIB (opsional; di iPhone/iPad aplikasi harus dipasang dulu)
 
 ## Memasang aplikasi
 
@@ -19,7 +20,7 @@ Buka aplikasinya: <https://rendicahya.github.io/seragam/>
 
 ## Teknologi
 
-Svelte 5, Vite, TypeScript, `vite-plugin-pwa`, dan Vitest. Aplikasi ini sepenuhnya statis, tanpa backend dan tanpa analitik.
+Svelte 5, Vite, TypeScript, `vite-plugin-pwa`, dan Vitest. Aplikasinya statis dan tanpa analitik. Satu-satunya backend adalah Cloudflare Worker kecil untuk pengingat harian, yang hanya menyimpan alamat langganan push.
 
 ## Pengembangan
 
@@ -34,11 +35,23 @@ npm run preview  # coba hasil build, termasuk service worker
 
 Setiap push ke `main` di-deploy otomatis lewat GitHub Actions.
 
+## Pengingat harian (Cloudflare Worker)
+
+Kode ada di `worker/`. Worker ini menyimpan langganan push di KV `SUBSCRIPTIONS` dan menjalankan cron `0 23 * * *` (06.00 WIB). Akhir pekan dan hari libur dilewati memakai aturan yang sama dengan aplikasi (`src/lib/reminder.ts`).
+
+```sh
+npx wrangler login     # sekali saja
+npm run worker:deploy  # deploy Worker (tidak ikut GitHub Actions)
+npm run worker:dev     # coba lokal; cron dipicu lewat /__scheduled
+```
+
+Kunci publik VAPID ada di `src/lib/push-config.ts`. Kunci privatnya disimpan sebagai secret `VAPID_PRIVATE_JWK` (`npx wrangler secret put VAPID_PRIVATE_JWK -c worker/wrangler.jsonc`). Jika kunci diganti, semua pengguna harus mengaktifkan ulang pengingat.
+
 ## Memperbarui data
 
 | Data | File | Kapan |
 | --- | --- | --- |
-| Aturan seragam | `src/lib/uniform.ts` | Saat aturan berubah |
+| Aturan seragam | `src/lib/schedule.ts` (foto di `src/lib/uniform.ts`) | Saat aturan berubah |
 | Hari libur dan cuti bersama | `src/data/holidays.json` | Setiap terbit SKB 3 Menteri baru; data saat ini sampai akhir 2027 |
 
 Data hari libur bersumber dari SKB 3 Menteri yang dimuat [Setneg](https://setneg.go.id/baca/index/inilah_skb_3_menteri_libur_nasional_dan_cuti_bersama_2027).

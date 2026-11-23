@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { addDays, dayOfWeek, formatLong, todayWib } from './date';
 import { holidayOn, holidays, isDayOff, isHolidayDataExpired, nextWorkday } from './holidays';
+import { reminderFor } from './reminder';
 import { uniformFor, weekOfMonth } from './uniform';
 
 describe('todayWib', () => {
@@ -102,5 +103,25 @@ describe('hari libur', () => {
   it('menandai data yang sudah habis', () => {
     expect(isHolidayDataExpired('2027-12-26')).toBe(false);
     expect(isHolidayDataExpired('2027-12-27')).toBe(true);
+  });
+});
+
+describe('reminderFor', () => {
+  it('berisi seragam hari kerja', () => {
+    expect(reminderFor('2026-11-04')).toEqual({ title: 'Hari ini: Krem 2025', body: 'Seragam 2025 · Minggu 1 & 2' });
+    expect(reminderFor('2026-11-06')?.title).toBe('Hari ini: Pakaian Bebas Rapi');
+  });
+
+  it('tidak dikirim pada akhir pekan dan hari libur', () => {
+    expect(reminderFor('2026-11-07')).toBeNull();
+    expect(reminderFor('2026-11-08')).toBeNull();
+    expect(reminderFor('2026-08-17')).toBeNull();
+  });
+
+  it('cron 23.00 UTC mengirim untuk tanggal WIB keesokan harinya', () => {
+    // Minggu 23.00 UTC = Senin 06.00 WIB.
+    expect(reminderFor(todayWib(new Date('2026-11-08T23:00:00Z')))?.title).toBe('Hari ini: Warna Putih');
+    // Jumat 23.00 UTC = Sabtu 06.00 WIB, tidak dikirim.
+    expect(reminderFor(todayWib(new Date('2026-11-06T23:00:00Z')))).toBeNull();
   });
 });

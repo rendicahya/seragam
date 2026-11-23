@@ -30,10 +30,12 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,webp,svg,png}'],
+        // Penanganan notifikasi pengingat harian (lihat worker/).
+        importScripts: ['push-sw.js'],
       },
     }),
   ],
   test: {
-    include: ['src/**/*.test.ts'],
+    include: ['src/**/*.test.ts', 'worker/src/**/*.test.ts'],
   },
 });

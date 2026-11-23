@@ -1,0 +1,13 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "seragam-push",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "kv_namespaces": [{ "binding": "SUBSCRIPTIONS", "id": "802c56bc61094736a306d717f0460ac3" }],
+  // Memanggil entrypoint Sender milik Worker ini sendiri untuk membagi pengiriman.
+  "services": [{ "binding": "SENDER", "service": "seragam-push", "entrypoint": "Sender" }],
+  // 23.00 UTC = 06.00 WIB. Worker sendiri yang melewati akhir pekan dan hari libur.
+  "triggers": { "crons": ["0 23 * * *"] },
+  "observability": { "enabled": true },
+}

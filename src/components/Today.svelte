@@ -3,6 +3,7 @@
   import { holidayOn, isDayOff, isHolidayDataExpired, nextWorkday } from '../lib/holidays';
   import { uniformFor, weekOfMonth } from '../lib/uniform';
   import InstallPrompt from './InstallPrompt.svelte';
+  import ReminderToggle from './ReminderToggle.svelte';
   import ThemeToggle from './ThemeToggle.svelte';
 
   let { today }: { today: string } = $props();
@@ -54,6 +55,8 @@
 {#if isHolidayDataExpired(today)}
   <p class="notice">Data hari libur sudah habis, jadi hanya akhir pekan yang dikenali sebagai libur.</p>
 {/if}
+
+<ReminderToggle />
 
 <InstallPrompt />
 
