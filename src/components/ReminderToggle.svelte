@@ -105,6 +105,11 @@
   </p>
 {:else if status === 'needs-install'}
   <p class="hint">🔔 Pasang aplikasi ini ke Layar Utama untuk menerima pengingat seragam setiap pagi.</p>
+{:else if status === 'unsupported'}
+  <p class="hint">
+    🔕 Browser ini tidak mendukung notifikasi pengingat. Buka aplikasi ini di Chrome (Android) atau Safari (iPhone)
+    untuk menerima pengingat setiap pagi.
+  </p>
 {/if}
 
 <style>
