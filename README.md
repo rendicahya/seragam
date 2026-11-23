@@ -11,7 +11,7 @@ Buka aplikasinya: <https://rendicahya.github.io/seragam/>
 - Berjalan offline dan mengikuti tanggal WIB
 - Tombol mode terang dan gelap
 - Tombol Update saat versi baru tersedia
-- Pengingat notifikasi setiap hari kerja pukul 06.00 WIB (opsional; di iPhone/iPad aplikasi harus dipasang dulu)
+- Pengingat notifikasi setiap hari kerja, lengkap dengan foto seragam: pagi pukul 06.00 WIB dan/atau malam sebelumnya pukul 19.00 WIB (opsional; di iPhone/iPad aplikasi harus dipasang dulu)
 
 ## Memasang aplikasi
 
@@ -37,12 +37,14 @@ Setiap push ke `main` di-deploy otomatis lewat GitHub Actions.
 
 ## Pengingat harian (Cloudflare Worker)
 
-Kode ada di `worker/`. Worker ini menyimpan langganan push di KV `SUBSCRIPTIONS` dan menjalankan cron `0 23 * * *` (06.00 WIB). Akhir pekan dan hari libur dilewati memakai aturan yang sama dengan aplikasi (`src/lib/reminder.ts`).
+Kode ada di `worker/`. Worker ini menyimpan langganan push (beserta pilihan waktunya) di KV `SUBSCRIPTIONS` dan menjalankan dua cron: `0 23 * * *` (06.00 WIB, seragam hari ini) dan `0 12 * * *` (19.00 WIB, seragam besok). Akhir pekan dan hari libur dilewati memakai aturan yang sama dengan aplikasi (`src/lib/reminder.ts`). Foto di notifikasi diambil dari `public/seragam/` di GitHub Pages.
+
+Worker ikut di-deploy oleh GitHub Actions pada setiap push ke `main`, jika secret repositori `CLOUDFLARE_API_TOKEN` (template token "Edit Cloudflare Workers") dan `CLOUDFLARE_ACCOUNT_ID` sudah diatur. Tanpa secret itu, langkah tersebut dilewati dengan peringatan.
 
 ```sh
 npx wrangler login     # sekali saja
-npm run worker:deploy  # deploy Worker (tidak ikut GitHub Actions)
-npm run worker:dev     # coba lokal; cron dipicu lewat /__scheduled
+npm run worker:deploy  # deploy Worker manual
+npm run worker:dev     # coba lokal; cron dipicu lewat /__scheduled?cron=0+23+*+*+*
 ```
 
 Kunci publik VAPID ada di `src/lib/push-config.ts`. Kunci privatnya disimpan sebagai secret `VAPID_PRIVATE_JWK` (`npx wrangler secret put VAPID_PRIVATE_JWK -c worker/wrangler.jsonc`). Jika kunci diganti, semua pengguna harus mengaktifkan ulang pengingat.

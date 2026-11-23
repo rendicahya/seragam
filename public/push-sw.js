@@ -15,6 +15,8 @@ self.addEventListener('push', (event) => {
       body: data.body || '',
       tag: data.tag || 'seragam',
       icon: 'icons/icon-192.png',
+      // Foto seragam; ditampilkan besar di Android, diabaikan di browser yang tidak mendukung.
+      ...(data.image && { image: data.image }),
       lang: 'id',
       data: { url: data.url || self.registration.scope },
     }),

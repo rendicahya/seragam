@@ -22,13 +22,27 @@ export interface UniformInfo {
   detail: string;
   /** Warna contoh kain untuk penanda di samping nama. */
   swatch?: string;
+  photo?: UniformPhoto;
 }
+
+export interface UniformPhoto {
+  /** Relatif terhadap akar aplikasi (public/), agar URL-nya tetap dan bisa dipakai di notifikasi. */
+  path: string;
+  width: number;
+  height: number;
+  /** Foto berisi beberapa seragam; yang dimaksud ditandai bintang. */
+  starred: boolean;
+}
+
+const photo2025 = (id: UniformId): UniformPhoto => ({ path: `seragam/${id}.webp`, width: 800, height: 481, starred: true });
+const photo2024 = (id: UniformId): UniformPhoto => ({ path: `seragam/${id}.webp`, width: 800, height: 600, starred: true });
 
 const MONDAY: UniformInfo = {
   id: 'putih',
   name: 'Warna Putih',
   detail: 'Seragam putih berlaku setiap hari Senin',
   swatch: '#ffffff',
+  photo: { path: 'seragam/putih.webp', width: 626, height: 417, starred: false },
 };
 
 const FRIDAY: UniformInfo = {
@@ -48,15 +62,15 @@ const DETAIL_2024 = 'Seragam 2024 · Minggu 3 & 4';
 
 /** Selasa (2) sampai Kamis (4), menurut kelompok minggu. */
 const WEEKS_1_2: Record<number, UniformInfo> = {
-  2: { id: 'abu-2025', name: 'Abu-abu Terang 2025', detail: DETAIL_2025, swatch: '#b4b3af' },
-  3: { id: 'krem-2025', name: 'Krem 2025', detail: DETAIL_2025, swatch: '#ede3c9' },
-  4: { id: 'batik-2025', name: 'Batik 2025', detail: DETAIL_2025, swatch: '#2d2738' },
+  2: { id: 'abu-2025', name: 'Abu-abu Terang 2025', detail: DETAIL_2025, swatch: '#b4b3af', photo: photo2025('abu-2025') },
+  3: { id: 'krem-2025', name: 'Krem 2025', detail: DETAIL_2025, swatch: '#ede3c9', photo: photo2025('krem-2025') },
+  4: { id: 'batik-2025', name: 'Batik 2025', detail: DETAIL_2025, swatch: '#2d2738', photo: photo2025('batik-2025') },
 };
 
 const WEEKS_3_4: Record<number, UniformInfo> = {
-  2: { id: 'abu-2024', name: 'Warna Abu-abu 2024', detail: DETAIL_2024, swatch: '#7586a0' },
-  3: { id: 'coklat-2024', name: 'Warna Coklat 2024', detail: DETAIL_2024, swatch: '#9a8468' },
-  4: { id: 'batik-2024', name: 'Batik 2024', detail: DETAIL_2024, swatch: '#4a3a2a' },
+  2: { id: 'abu-2024', name: 'Warna Abu-abu 2024', detail: DETAIL_2024, swatch: '#7586a0', photo: photo2024('abu-2024') },
+  3: { id: 'coklat-2024', name: 'Warna Coklat 2024', detail: DETAIL_2024, swatch: '#9a8468', photo: photo2024('coklat-2024') },
+  4: { id: 'batik-2024', name: 'Batik 2024', detail: DETAIL_2024, swatch: '#4a3a2a', photo: photo2024('batik-2024') },
 };
 
 /**

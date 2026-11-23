@@ -108,8 +108,27 @@ describe('hari libur', () => {
 
 describe('reminderFor', () => {
   it('berisi seragam hari kerja', () => {
-    expect(reminderFor('2026-11-04')).toEqual({ title: 'Hari ini: Krem 2025', body: 'Seragam 2025 · Minggu 1 & 2' });
-    expect(reminderFor('2026-11-06')?.title).toBe('Hari ini: Pakaian Bebas Rapi');
+    expect(reminderFor('2026-11-04')).toEqual({
+      title: 'Hari ini: Krem 2025',
+      body: 'Seragam 2025 · Minggu 1 & 2',
+      image: 'seragam/krem-2025.webp',
+    });
+    expect(reminderFor('2026-11-06')).toEqual({
+      title: 'Hari ini: Pakaian Bebas Rapi',
+      body: 'Gunakan pakaian bebas yang rapi dan sopan',
+    });
+  });
+
+  it('pengingat malam menyebut seragam besok', () => {
+    expect(reminderFor('2026-11-09', 'malam')?.title).toBe('Besok: Warna Putih');
+  });
+
+  it('semua foto seragam ada di public/', () => {
+    const files = Object.keys(import.meta.glob('/public/seragam/*.webp'));
+    for (let day = 1; day <= 30; day++) {
+      const photo = uniformFor(`2026-11-${String(day).padStart(2, '0')}`).photo;
+      if (photo) expect(files).toContain(`/public/${photo.path}`);
+    }
   });
 
   it('tidak dikirim pada akhir pekan dan hari libur', () => {

@@ -1,7 +1,7 @@
 import { WorkerEntrypoint } from 'cloudflare:workers';
-import { todayWib } from '../../src/lib/date';
+import { addDays, todayWib } from '../../src/lib/date';
 import { APP_ORIGIN, APP_URL, VAPID_PUBLIC_KEY } from '../../src/lib/push-config';
-import { reminderFor } from '../../src/lib/reminder';
+import { REMINDER_TIMES, reminderFor, type ReminderTime } from '../../src/lib/reminder';
 import { base64urlDecode, base64urlEncode, sendPush, type PushTarget, type VapidKeys } from './webpush';
 
 interface Env {
@@ -22,7 +22,17 @@ interface TargetMetadata {
   e: string;
   p: string;
   a: string;
+  /** Waktu pengingat yang dipilih; langganan lama tanpa field ini hanya menerima pagi. */
+  t?: ReminderTime[];
 }
+
+const DEFAULT_TIMES: ReminderTime[] = ['pagi'];
+
+/** Cron di wrangler.jsonc: 23.00 UTC = 06.00 WIB esok hari, 12.00 UTC = 19.00 WIB. */
+const CRON_TIME: Record<string, ReminderTime> = { '0 23 * * *': 'pagi', '0 12 * * *': 'malam' };
+
+/** Pengingat kedaluwarsa jika belum sampai: pagi sampai siang, malam sampai pengingat pagi. */
+const TTL_SECONDS: Record<ReminderTime, number> = { pagi: 6 * 3600, malam: 11 * 3600 };
 
 const ALLOWED_ORIGINS = new Set([APP_ORIGIN, 'http://localhost:5173', 'http://localhost:4173']);
 
@@ -31,9 +41,6 @@ const ALLOWED_ORIGINS = new Set([APP_ORIGIN, 'http://localhost:5173', 'http://lo
  * ke beberapa pemanggilan Sender. Tiap kelompok menyisakan ruang untuk hapus KV.
  */
 const BATCH_SIZE = 20;
-
-/** Pengingat pagi tidak berguna lagi setelah siang hari. */
-const REMINDER_TTL_SECONDS = 6 * 3600;
 
 function vapidKeys(env: Env): VapidKeys {
   return { publicKey: VAPID_PUBLIC_KEY, privateJwk: JSON.parse(env.VAPID_PRIVATE_JWK), subject: APP_URL };
@@ -44,13 +51,14 @@ async function targetId(endpoint: string): Promise<string> {
   return base64urlEncode(new Uint8Array(digest));
 }
 
-async function listTargets(env: Env): Promise<StoredTarget[]> {
+async function listTargets(env: Env, time: ReminderTime): Promise<StoredTarget[]> {
   const targets: StoredTarget[] = [];
   let cursor: string | undefined;
   do {
     const page = await env.SUBSCRIPTIONS.list<TargetMetadata>({ cursor });
-    for (const key of page.keys) {
-      if (key.metadata) targets.push({ id: key.name, endpoint: key.metadata.e, p256dh: key.metadata.p, auth: key.metadata.a });
+    for (const { name, metadata } of page.keys) {
+      if (!metadata || !(metadata.t ?? DEFAULT_TIMES).includes(time)) continue;
+      targets.push({ id: name, endpoint: metadata.e, p256dh: metadata.p, auth: metadata.a });
     }
     cursor = page.list_complete ? undefined : page.cursor;
   } while (cursor);
@@ -74,6 +82,19 @@ function parseSubscription(value: unknown): PushTarget | null {
   return { endpoint, p256dh, auth };
 }
 
+/** Daftar waktu yang sah dan tidak kosong, atau null. */
+function parseTimes(value: unknown): ReminderTime[] | null {
+  if (!Array.isArray(value)) return null;
+  const times = REMINDER_TIMES.filter((time) => value.includes(time));
+  return times.length > 0 ? times : null;
+}
+
+async function storedTimes(env: Env, endpoint: unknown): Promise<ReminderTime[] | null> {
+  if (typeof endpoint !== 'string') return null;
+  const { metadata } = await env.SUBSCRIPTIONS.getWithMetadata<TargetMetadata>(await targetId(endpoint));
+  return metadata ? (metadata.t ?? DEFAULT_TIMES) : null;
+}
+
 function corsHeaders(request: Request): HeadersInit {
   const origin = request.headers.get('Origin');
   if (!origin || !ALLOWED_ORIGINS.has(origin)) return {};
@@ -89,13 +110,21 @@ function corsHeaders(request: Request): HeadersInit {
 async function handleSubscribe(request: Request, env: Env, ctx: ExecutionContext): Promise<number> {
   const body = (await request.json().catch(() => null)) as {
     subscription?: unknown;
+    times?: unknown;
     confirm?: unknown;
     replaces?: unknown;
   } | null;
   const target = parseSubscription(body?.subscription);
   if (!target) return 400;
+  if (body?.times !== undefined && !parseTimes(body.times)) return 400;
 
-  const metadata: TargetMetadata = { e: target.endpoint, p: target.p256dh, a: target.auth };
+  // Tanpa `times` (mis. dari pushsubscriptionchange), pilihan lama dipertahankan.
+  const times =
+    parseTimes(body?.times) ??
+    (await storedTimes(env, target.endpoint)) ??
+    (await storedTimes(env, body?.replaces)) ??
+    DEFAULT_TIMES;
+  const metadata: TargetMetadata = { e: target.endpoint, p: target.p256dh, a: target.auth, t: times };
   await env.SUBSCRIPTIONS.put(await targetId(target.endpoint), '', { metadata });
 
   if (typeof body?.replaces === 'string' && body.replaces !== target.endpoint) {
@@ -105,7 +134,7 @@ async function handleSubscribe(request: Request, env: Env, ctx: ExecutionContext
   if (body?.confirm === true) {
     const payload = JSON.stringify({
       title: 'Pengingat seragam aktif',
-      body: 'Anda akan diingatkan setiap hari kerja pukul 06.00 WIB.',
+      body: 'Anda akan diingatkan seragam setiap hari kerja.',
       tag: 'seragam-confirm',
       url: APP_URL,
     });
@@ -127,13 +156,13 @@ async function handleUnsubscribe(request: Request, env: Env): Promise<number> {
 
 /** Mengirim ke sekelompok langganan; dipanggil lewat binding agar mendapat jatah subrequest sendiri. */
 export class Sender extends WorkerEntrypoint<Env> {
-  async sendBatch(targets: StoredTarget[], payload: string) {
+  async sendBatch(targets: StoredTarget[], payload: string, ttlSeconds: number) {
     const vapid = vapidKeys(this.env);
     const result = { sent: 0, removed: 0, failed: 0 };
     await Promise.all(
       targets.map(async (target) => {
         try {
-          const res = await sendPush(target, payload, vapid, REMINDER_TTL_SECONDS);
+          const res = await sendPush(target, payload, vapid, ttlSeconds);
           await res.body?.cancel();
           if (res.ok) {
             result.sent++;
@@ -169,21 +198,34 @@ export default {
     return new Response(null, { status, headers: cors });
   },
 
-  // Cron 23.00 UTC = 06.00 WIB keesokan harinya; hari libur dilewati di sini.
+  // Hari libur dilewati di sini, bukan lewat jadwal cron.
   async scheduled(controller, env) {
-    const date = todayWib(new Date(controller.scheduledTime));
-    const reminder = reminderFor(date);
+    const time = CRON_TIME[controller.cron];
+    if (!time) {
+      console.error('Cron tidak dikenal', controller.cron);
+      return;
+    }
+    const today = todayWib(new Date(controller.scheduledTime));
+    const date = time === 'pagi' ? today : addDays(today, 1);
+    const reminder = reminderFor(date, time);
     if (!reminder) {
-      console.log(`${date}: hari libur, tidak ada pengingat`);
+      console.log(`${time} ${date}: hari libur, tidak ada pengingat`);
       return;
     }
 
-    const targets = await listTargets(env);
-    const payload = JSON.stringify({ ...reminder, tag: `seragam-${date}`, url: APP_URL });
+    const targets = await listTargets(env, time);
+    // Tag sama untuk tanggal yang sama, jadi pengingat pagi menggantikan pengingat malam sebelumnya.
+    const payload = JSON.stringify({
+      title: reminder.title,
+      body: reminder.body,
+      image: reminder.image && new URL(reminder.image, APP_URL).href,
+      tag: `seragam-${date}`,
+      url: APP_URL,
+    });
     const batches: StoredTarget[][] = [];
     for (let i = 0; i < targets.length; i += BATCH_SIZE) batches.push(targets.slice(i, i + BATCH_SIZE));
 
-    const results = await Promise.allSettled(batches.map((batch) => env.SENDER.sendBatch(batch, payload)));
+    const results = await Promise.allSettled(batches.map((batch) => env.SENDER.sendBatch(batch, payload, TTL_SECONDS[time])));
     const total = { sent: 0, removed: 0, failed: 0 };
     for (const [i, result] of results.entries()) {
       if (result.status === 'fulfilled') {
@@ -195,6 +237,6 @@ export default {
         console.error('Kelompok gagal', result.reason);
       }
     }
-    console.log(`${date}: ${reminder.title}`, total);
+    console.log(`${time} ${date}: ${reminder.title}`, total);
   },
 } satisfies ExportedHandler<Env>;
