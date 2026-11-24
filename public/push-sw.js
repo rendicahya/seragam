@@ -14,6 +14,9 @@ self.addEventListener('push', (event) => {
     self.registration.showNotification(data.title || 'Pakai seragam apa hari ini?', {
       body: data.body || '',
       tag: data.tag || 'seragam',
+      // Pengingat pagi memakai tag yang sama dengan pengingat malam sebelumnya; tanpa ini
+      // penggantiannya terjadi diam-diam (tanpa bunyi/getar) jika notifikasi malam belum ditutup.
+      renotify: true,
       icon: 'icons/icon-192.png',
       // Foto seragam; ditampilkan besar di Android, diabaikan di browser yang tidak mendukung.
       ...(data.image && { image: data.image }),

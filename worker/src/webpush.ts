@@ -124,7 +124,8 @@ export async function sendPush(
       'Content-Encoding': 'aes128gcm',
       'Content-Type': 'application/octet-stream',
       TTL: String(ttlSeconds),
-      Urgency: 'normal',
+      // 'normal' boleh ditahan Android saat ponsel diam (Doze), padahal pengingat ini terikat waktu.
+      Urgency: 'high',
     },
     body,
   });
