@@ -1,5 +1,7 @@
 :root {
-  color-scheme: light;
+  /* `only` mencegah browser (mis. Night mode Brave, "darken websites" Chrome) memaksa mode gelap
+     saat pengguna memilih mode terang. */
+  color-scheme: only light;
   --bg: #f6f4ef;
   --surface: #ffffff;
   --surface-muted: #ece9e1;
